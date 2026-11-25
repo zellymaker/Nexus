@@ -1,0 +1,270 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.13);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #0e0f13;
+  color: #e9e9ee;
+  font-family: 'Inter Variable', Inter, system-ui, sans-serif;
+  font-feature-settings: 'cv11' 1, 'ss01' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(135, 127, 254, 0.32);
+}
+
+/* ---------- scrollbars ---------- */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  overscroll-behavior: contain;
+}
+.scroll-thin:hover {
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+.scroll-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 6px;
+}
+.scroll-thin:hover::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+}
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- note editor ---------- */
+.editor-content {
+  outline: none;
+  user-select: text;
+  caret-color: #b9b3ff;
+  padding-bottom: 120px;
+}
+.editor-content:empty::before {
+  content: '';
+}
+
+.ed-h1 {
+  margin: 0 0 12px;
+  font-size: 22px;
+  line-height: 31px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: #f0f0f4;
+}
+.ed-h3 {
+  margin: 0 0 13px;
+  font-size: 19px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: -0.008em;
+  color: #ececf1;
+}
+.ed-p {
+  margin: 0 0 6px;
+  font-size: 15.5px;
+  line-height: 23px;
+  font-weight: 400;
+  color: #cfcfd6;
+}
+.ed-p + .ed-p {
+  margin-top: 0;
+}
+.ed-ul {
+  margin: 0 0 2px;
+  padding: 0;
+  list-style: none;
+}
+.ed-li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 15.5px;
+  line-height: 23px;
+  color: #cfcfd6;
+}
+.ed-li::before {
+  content: '•';
+  position: absolute;
+  left: 5px;
+  top: 0;
+  color: #b7b7c0;
+  font-size: 13px;
+}
+.ed-li + .ed-li {
+  margin-top: 1px;
+}
+
+.ed-quote {
+  position: relative;
+  margin: 0 0 26px;
+  padding: 2px 0 2px 42px;
+  border-left: 3px solid #4a4877;
+  color: #cfcfd6;
+}
+.ed-quote::before {
+  content: '“';
+  position: absolute;
+  left: 10px;
+  top: 1px;
+  font-size: 24px;
+  line-height: 1;
+  color: #8d86f1;
+}
+.ed-quote .ed-p {
+  font-style: italic;
+  line-height: 23px;
+  margin: 0;
+}
+.ed-quote .ed-p + .ed-p {
+  margin-top: 7px;
+}
+
+.ed-code {
+  position: relative;
+  margin: 0 0 24px;
+  padding: 15px 18px;
+  min-height: 46px;
+  border-radius: 10px;
+  background: #2b2b34;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 20px;
+  color: #c9c9d2;
+  white-space: pre-wrap;
+}
+.ed-code-icon {
+  color: #8a8a94;
+  font-family: 'Inter Variable', Inter, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.note-link,
+.md-link {
+  color: #8d86f1;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: color 120ms ease;
+}
+.note-link:hover,
+.md-link:hover {
+  color: #aaa4ff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.note-link.is-underlined {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(141, 134, 241, 0.5);
+}
+.md-mark {
+  color: #6b66a8;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- misc ---------- */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+.drag-region {
+  -webkit-app-region: drag;
+  app-region: drag;
+}
+.no-drag {
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
+}
+
+/* ---------- native execCommand fallbacks (only for elements without
+   the pre-styled classes, i.e. content created by the toolbar) ---------- */
+.editor-content h2:not([class]) {
+  margin: 20px 0 14px;
+  font-size: 23px;
+  line-height: 33px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: #f0f0f4;
+}
+.editor-content h3:not([class]) {
+  margin: 18px 0 12px;
+  font-size: 19px;
+  line-height: 28px;
+  font-weight: 600;
+  color: #ececf1;
+}
+.editor-content p:not([class]) {
+  margin: 0 0 5px;
+  font-size: 15.5px;
+  line-height: 26px;
+  color: #cfcfd6;
+}
+.editor-content ul:not([class]) {
+  margin: 0 0 12px;
+  padding-left: 22px;
+  list-style: disc;
+}
+.editor-content ol:not([class]) {
+  margin: 0 0 12px;
+  padding-left: 22px;
+  list-style: decimal;
+}
+.editor-content li:not([class]) {
+  font-size: 15.5px;
+  line-height: 24px;
+  color: #cfcfd6;
+}
+.editor-content blockquote:not([class]) {
+  margin: 16px 0;
+  padding: 2px 0 2px 18px;
+  border-left: 3px solid #4a4877;
+  font-style: italic;
+  color: #cfcfd6;
+}
+.editor-content pre:not([class]) {
+  margin: 16px 0;
+  padding: 16px 18px;
+  border-radius: 10px;
+  background: #2b2b34;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 20px;
+  color: #c9c9d2;
+  white-space: pre-wrap;
+}
+.editor-content a {
+  color: #8d86f1;
+  cursor: pointer;
+}
+.editor-content b,
+.editor-content strong {
+  font-weight: 600;
+  color: #e4e4ea;
+}

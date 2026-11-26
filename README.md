@@ -5,7 +5,8 @@
 полноценные настройки — всё в одном нативном окне. Данные не покидают устройство: нет
 аккаунтов, синхронизации, телеметрии и сетевых запросов.
 
-[![Release](https://img.shields.io/badge/version-0.1.0-877ffe)](https://github.com/zellymaker/nexus/releases)
+[![Release](https://img.shields.io/badge/version-0.1.0-877ffe)](https://github.com/zellymaker/Nexus/releases)
+[![CI](https://github.com/zellymaker/Nexus/actions/workflows/ci.yml/badge.svg)](https://github.com/zellymaker/Nexus/actions/workflows/ci.yml)
 [![Tauri](https://img.shields.io/badge/Tauri-2.12-24C8D8)](https://tauri.app)
 [![React](https://img.shields.io/badge/React-19-61DAFB)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6)](https://www.typescriptlang.org)

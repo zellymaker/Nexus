@@ -8,6 +8,25 @@ NEXUS — локальное десктоп-приложение (Tauri 2). Да
 
 ---
 
+## Вариант 0. AppImage (рекомендуется)
+
+Один портативный файл, внутри — все нужные библиотеки (включая WebKitGTK). Ничего
+устанавливать не требуется.
+
+```bash
+curl -L -o NEXUS.AppImage \
+  https://github.com/zellymaker/Nexus/releases/download/v0.1.0/NEXUS_0.1.0_amd64.AppImage
+chmod +x NEXUS.AppImage
+./NEXUS.AppImage
+```
+
+Проверка целостности:
+
+```bash
+curl -L -O https://github.com/zellymaker/Nexus/releases/download/v0.1.0/SHA256SUMS.txt
+sha256sum -c SHA256SUMS.txt
+```
+
 ## Вариант 1. Готовый бинарник (самый быстрый)
 
 Требуется Linux x86_64 и системные библиотеки WebKitGTK (см. «Зависимости»).

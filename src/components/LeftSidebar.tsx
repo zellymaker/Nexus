@@ -29,7 +29,6 @@ import {
 import type { NavId } from '../lib/store'
 import { useT } from '../lib/i18n'
 import { formatBinding } from '../lib/shortcuts'
-import { GraphPreview } from './GraphPreview'
 import { ContextMenu } from './ui/ContextMenu'
 import type { MenuItem } from './ui/ContextMenu'
 import type { WsNode } from '../lib/store'
@@ -488,20 +487,6 @@ export function LeftSidebar() {
           )
         })}
       </nav>
-
-      {/* mini canvas / graph card */}
-      <button
-        type="button"
-        aria-label={t('palette.openCanvas', 'Open Canvas')}
-        title={t('palette.openCanvas', 'Open Canvas')}
-        onClick={() => {
-          setNav('canvas')
-          setView({ kind: 'canvas' })
-        }}
-        className="mx-[12px] mt-[13px] block h-[102px] shrink-0 overflow-hidden rounded-[10px] transition-opacity hover:opacity-90"
-      >
-        <GraphPreview className="h-full w-full" />
-      </button>
 
       {/* daily notes */}
       <button

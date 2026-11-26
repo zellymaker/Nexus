@@ -1,0 +1,38 @@
+NEXUS — результаты тестирования (финальная сборка 2026-11-26 05:01)
+
+Платформа: CachyOS / niri (Wayland), релизный Tauri build (stripped), тестовый браузер Chromium
+(Playwright), frozen production preview (vite build → vite preview), viewport 1440×900.
+
+СВОДНЫЙ НАБОР (сценарии раздела 9 ТЗ): 25 PASS / 0 FAIL, console/page errors: 0
+- §9.1-2 создание документа (Ctrl+N) и папки (Ctrl+Shift+N) — PASS
+- §9.3-4 переименование документа и папки (F2) — PASS
+- §9.5-8 удаление документа, папки (с выбором cascade/hoist), undo из тоста — PASS
+- §9.9 Delete в редакторе не удаляет элемент; Delete в Explorer — PASS
+- §5 6 тем + системная, язык RU/EN без перезапуска, типографика, персистентность после reload — PASS
+- §6 командная палитра Ctrl+P, Ctrl+S, Ctrl+Tab/Ctrl+Shift+Tab, Ctrl+B — PASS
+- §9.10-16 Canvas: сид-объекты, sticky, undo/redo, delete, zoom, persist, hotkeys, новый канвас — PASS
+- §9.17 данные сохраняются после перезапуска — PASS
+- §7 empty states, контекстные меню, уведомления — PASS
+- §9.24 offline: внешних сетевых запросов 0 — PASS
+- no console/page errors — PASS
+
+CANVAS-НАБОР (отдельный): 9 PASS / 0 FAIL
+seed objects & properties panel; sticky creation; Ctrl+Z / Ctrl+Shift+Z;
+select+Delete через canvas-guard; zoom-in меняет масштаб; persist валиден
+(canvases id-keyed, activeCanvasId существует, objectCount>0); shortcut S;
+новый канвас по «+»; 0 ошибок консоли.
+
+SETTINGS-НАБОР: 13 PASS / 0 FAIL
+Appearance (темы), Nexus Light/Dracula/Nord, UI scale 110%, Typography sliders,
+Shortcuts list, Privacy+backup UI, About, reduced motion, density, RU язык, persist after reload.
+
+CRUD EXPLORER: 5/5 PASS (create/rename/delete/undo/folder modes) — ранее в ходе разработки.
+
+МЕТРИКИ (frozen prod build):
+- до networkidle ~1.9 s (включая запуск браузера в тестовом окружении)
+- JS heap ~10 MB, DOM-узлов ~565, ресурсов 3, dist 1.2 MB
+- бандл: index.js ~862 KB (gzip ≤ ~230 KB с Konva/react-konva), CSS ~42 KB
+- внешних запросов: 0; сеть не используется
+
+РЕАЛЬНОЕ ОКНО: релизный бинарник 7.4 MB (stripped), запущен на niri (Wayland),
+окно 1440×900, CSP production, темы/шрифты/данные работают; скриншоты в screenshots/audit/.

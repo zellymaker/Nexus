@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# NEXUS local artifacts
+/nexus-backup-*.json
+*.tmp

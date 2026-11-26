@@ -11,6 +11,7 @@ import {
   Underline,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import { useT } from '../lib/i18n'
 
 export type FormatAction =
   | 'scroll-top'
@@ -26,20 +27,21 @@ export type FormatAction =
 
 interface ToolButton {
   action: FormatAction
-  label: string
+  labelKey: string
+  fallback: string
   icon: LucideIcon
 }
 
 const BUTTONS: ToolButton[] = [
-  { action: 'scroll-top', label: 'Scroll to top', icon: ChevronsLeft },
-  { action: 'heading', label: 'Heading', icon: Heading2 },
-  { action: 'bold', label: 'Bold', icon: Bold },
-  { action: 'italic', label: 'Italic', icon: Italic },
-  { action: 'underline', label: 'Underline', icon: Underline },
-  { action: 'link', label: 'Link', icon: Paperclip },
-  { action: 'ul', label: 'Bulleted list', icon: List },
-  { action: 'ol', label: 'Numbered list', icon: ListOrdered },
-  { action: 'code', label: 'Code block', icon: SquareCode },
+  { action: 'scroll-top', labelKey: 'editor.scrollTop', fallback: 'Scroll to top', icon: ChevronsLeft },
+  { action: 'heading', labelKey: 'editor.heading', fallback: 'Heading', icon: Heading2 },
+  { action: 'bold', labelKey: 'editor.bold', fallback: 'Bold', icon: Bold },
+  { action: 'italic', labelKey: 'editor.italic', fallback: 'Italic', icon: Italic },
+  { action: 'underline', labelKey: 'editor.underline', fallback: 'Underline', icon: Underline },
+  { action: 'link', labelKey: 'editor.link', fallback: 'Link', icon: Paperclip },
+  { action: 'ul', labelKey: 'editor.bulletList', fallback: 'Bulleted list', icon: List },
+  { action: 'ol', labelKey: 'editor.numberedList', fallback: 'Numbered list', icon: ListOrdered },
+  { action: 'code', labelKey: 'editor.codeBlock', fallback: 'Code block', icon: SquareCode },
 ]
 
 interface FormattingToolbarProps {
@@ -47,43 +49,45 @@ interface FormattingToolbarProps {
 }
 
 export function FormattingToolbar({ onFormat }: FormattingToolbarProps) {
+  const t = useT()
   return (
     <div
       role="toolbar"
-      aria-label="Text formatting"
-      className="pointer-events-auto inline-flex h-[32px] items-center gap-[1px] rounded-[9px] border border-[#34343c] bg-[#222228]/95 px-[4px] shadow-toolbar backdrop-blur-[6px]"
+      aria-label={t('editor.formatting', 'Text formatting')}
+      className="anim-fade-in pointer-events-auto inline-flex h-[32px] items-center gap-[1px] rounded-[9px] border border-line-strong bg-toolbar/95 px-[4px] shadow-toolbar backdrop-blur-[6px]"
     >
-      {BUTTONS.map((b, i) => {
-        const Icon = b.icon
-        const active = b.action === 'heading'
+      {BUTTONS.map((button, index) => {
+        const Icon = button.icon
+        const active = button.action === 'heading'
+        const label = t(button.labelKey, button.fallback)
         return (
           <button
-            key={b.action}
+            key={button.action}
             type="button"
-            title={b.label}
-            aria-label={b.label}
-            onMouseDown={(e) => e.preventDefault()}
-            onClick={() => onFormat(b.action)}
+            title={label}
+            aria-label={label}
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => onFormat(button.action)}
             className={`grid h-[24px] w-[24px] place-items-center rounded-[6px] transition-colors ${
-              i === 0 ? 'mr-[2px]' : ''
+              index === 0 ? 'mr-[2px]' : ''
             } ${
               active
-                ? 'bg-[#303038] text-[#e8e8ec]'
-                : 'text-[#b0b0ba] hover:bg-white/[0.07] hover:text-[#e4e4ea]'
+                ? 'bg-surface-3 text-ink'
+                : 'text-ink-dim hover:bg-hover hover:text-ink'
             }`}
           >
             <Icon size={15} strokeWidth={1.9} />
           </button>
         )
       })}
-      <span className="mx-[5px] h-[16px] w-px bg-white/[0.12]" />
+      <span className="mx-[5px] h-[16px] w-px bg-line-strong" />
       <button
         type="button"
-        title="Clear formatting"
-        aria-label="Clear formatting"
-        onMouseDown={(e) => e.preventDefault()}
+        title={t('editor.clearFormatting', 'Clear formatting')}
+        aria-label={t('editor.clearFormatting', 'Clear formatting')}
+        onMouseDown={(event) => event.preventDefault()}
         onClick={() => onFormat('clear')}
-        className="grid h-[24px] w-[24px] place-items-center rounded-[6px] text-[#b0b0ba] transition-colors hover:bg-white/[0.07] hover:text-[#e4e4ea]"
+        className="grid h-[24px] w-[24px] place-items-center rounded-[6px] text-ink-dim transition-colors hover:bg-hover hover:text-ink"
       >
         <Ellipsis size={16} strokeWidth={1.9} />
       </button>

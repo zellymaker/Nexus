@@ -5,7 +5,7 @@
 полноценные настройки — всё в одном нативном окне. Данные не покидают устройство: нет
 аккаунтов, синхронизации, телеметрии и сетевых запросов.
 
-[![Release](https://img.shields.io/badge/version-0.1.0-877ffe)](https://github.com/<USER>/nexus/releases)
+[![Release](https://img.shields.io/badge/version-0.1.0-877ffe)](https://github.com/zellymaker/nexus/releases)
 [![Tauri](https://img.shields.io/badge/Tauri-2.12-24C8D8)](https://tauri.app)
 [![React](https://img.shields.io/badge/React-19-61DAFB)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6)](https://www.typescriptlang.org)
@@ -62,7 +62,7 @@
 ### Быстро: готовый бинарник
 
 ```bash
-curl -L -o nexus.tar.gz https://github.com/<USER>/nexus/releases/download/v0.1.0/nexus-0.1.0-linux-x86_64.tar.gz
+curl -L -o nexus.tar.gz https://github.com/zellymaker/nexus/releases/download/v0.1.0/nexus-0.1.0-linux-x86_64.tar.gz
 tar -xzf nexus.tar.gz
 chmod +x nexus && ./nexus
 ```
@@ -72,7 +72,7 @@ chmod +x nexus && ./nexus
 ### Из исходников
 
 ```bash
-git clone https://github.com/<USER>/nexus.git
+git clone https://github.com/zellymaker/nexus.git
 cd nexus
 pnpm install
 pnpm tauri dev                 # разработка

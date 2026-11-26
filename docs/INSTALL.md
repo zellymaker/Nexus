@@ -14,7 +14,7 @@ NEXUS — локальное десктоп-приложение (Tauri 2). Да
 
 ```bash
 # скачать из GitHub Releases (подставьте актуальную версию)
-curl -L -o nexus.tar.gz https://github.com/<USER>/nexus/releases/download/v0.1.0/nexus-0.1.0-linux-x86_64.tar.gz
+curl -L -o nexus.tar.gz https://github.com/zellymaker/nexus/releases/download/v0.1.0/nexus-0.1.0-linux-x86_64.tar.gz
 
 tar -xzf nexus.tar.gz
 chmod +x nexus
@@ -77,7 +77,7 @@ sudo dnf install -y gcc gcc-c++ make curl wget file openssl-devel \
 ### Сборка и запуск
 
 ```bash
-git clone https://github.com/<USER>/nexus.git
+git clone https://github.com/zellymaker/nexus.git
 cd nexus
 pnpm install
 

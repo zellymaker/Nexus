@@ -1,123 +1,130 @@
 # NEXUS
 
-Локальное десктопное приложение для работы со знаниями: дерево документов,
-markdown-редактор, обратные ссылки/связи, **интерактивный Canvas (infinite whiteboard)**,
-полноценные настройки (6 тем, типографика, хоткеи, приватность), Command Palette.
+**Локальное десктоп-приложение для работы со знаниями.** Документы и папки, markdown-редактор,
+обратные ссылки и связи, интерактивный Canvas (infinite whiteboard), Command Palette и
+полноценные настройки — всё в одном нативном окне. Данные не покидают устройство: нет
+аккаунтов, синхронизации, телеметрии и сетевых запросов.
 
-Построено на **Tauri 2 + React 19 + TypeScript + Tailwind CSS + Lucide**, состояние —
-`zustand` с персистентностью в localStorage WebView. Сетевых запросов и телеметрии нет:
-все данные остаются на устройстве.
+[![Release](https://img.shields.io/badge/version-0.1.0-877ffe)](https://github.com/<USER>/nexus/releases)
+[![Tauri](https://img.shields.io/badge/Tauri-2.12-24C8D8)](https://tauri.app)
+[![React](https://img.shields.io/badge/React-19-61DAFB)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/badge/license-MIT-8A2BE2)](LICENSE)
 
-![NEXUS](screenshots/audit/01-main-1440x900.png)
+![NEXUS — основной экран](screenshots/audit/01-main-1440x900.png)
 
-## Что умеет
+## Скриншоты
+
+| Основной экран | Command Palette |
+| --- | --- |
+| ![Main](screenshots/audit/01-main-1440x900.png) | ![Palette](screenshots/audit/02-command-palette.png) |
+
+| Canvas — интерактивная доска | Настройки (6 тем) |
+| --- | --- |
+| ![Canvas](screenshots/audit/03-canvas.png) | ![Settings](screenshots/audit/05-settings-appearance.png) |
+
+| Светлая тема | Управление горячими клавишами |
+| --- | --- |
+| ![Light](screenshots/audit/06-settings-theme-light.png) | ![Shortcuts](screenshots/audit/07-settings-shortcuts.png) |
+
+## Возможности
 
 ### Рабочее пространство
-- Workspace Explorer: единое дерево заметок/папок, вложенность, inline-переименование (F2),
-  мультивыбор (Ctrl/Shift), контекстное меню, создание заметок/папок/канвасов.
-- **Удаление**: клавиша Delete (только вне текстовых полей), контекстное меню,
-  кнопка в шапке Explorer, подтверждение с выбором «удалить папку с содержимым» или
-  «перенести содержимое выше», настройка «больше не спрашивать», Undo из тоста и
-  Ctrl+Z/Ctrl+Shift+Z (глобально, вне редактора). Удалённые элементы сразу исчезают из
-  поиска, списков, backlinks и Canvas-карточек.
-- Вкладки документов: создание, переключение (Ctrl+Tab / Ctrl+Shift+Tab), закрытие (Ctrl+W),
-  анимация появления, состояние переживает перезапуск.
+- Workspace Explorer: вложенные папки и заметки, inline-переименование (F2), мультивыбор
+  (Ctrl/Shift), контекстные меню, создание заметок/папок/досок.
+- Полноценное удаление: Delete (вне текстовых полей), меню, кнопка, подтверждение с выбором
+  «удалить папку с содержимым / перенести содержимое выше», Undo из тоста и Ctrl+Z.
+- Вкладки документов: Ctrl+Tab / Ctrl+Shift+Tab, Ctrl+W, восстановление сессии.
 
 ### Редактор
-- Markdown-live редактор на contentEditable: заголовки, списки, цитаты, код, `[[ссылки]]`,
-  панель форматирования, вставка ссылок через диалог.
-- Настройки: размер/интервал, перенос строк, «номера строк», подсветка разметки,
-  стиль курсора, размер табуляции, автосохранение и его интервал.
-- Глобальный поиск с подсветкой результатов, backlinks и related-заметки вычисляются
-  из реального содержимого и тегов.
+- Markdown-live: заголовки, списки, цитаты, код, `[[ссылки]]`, floating toolbar, диалог ссылки.
+- Настройки шрифтов, интервалов, переноса строк, номеров строк, подсветки, автосохранения.
+- Глобальный поиск, вычисляемые backlinks/related-заметки, теги, статус и приоритет документа.
 
-### Canvas — интерактивная доска
-- Бесконечный холст: pan (пробел/hand), zoom (Ctrl+wheel, кнопки, 10–400%), fit-to-content,
-  reset zoom; viewport сохраняется.
-- Инструменты: Select, Hand, Sticky, Text, Shapes (rect/ellipse), Connector, Free draw,
-  Image, Document card, Eraser.
-- Редактирование: выделение (клик/shift/marquee), move, resize/rotate, цвета, текст,
-  шрифт, толщина, прозрачность, duplicate/delete, copy/paste, z-order, выравнивание,
-  группировка.
-- Соединения привязаны к объектам и не рвутся при перемещении; удаляются отдельно.
-- Несколько канвасов: создание, переименование, удаление, переключение; всё автосохраняется
-  (`nexus:canvas:v1`), undo/redo на канвас.
-- Карточки документов ссылаются на реальные заметки и открывают их; удалённые документы
-  помечаются «Document deleted».
-- Canvas-шорткаты (V/H/S/T/R/C/D/I/O/E, Delete, Ctrl+Z/Shift+Z, Ctrl+D, Ctrl+C/V/A, Escape),
-  поиск по объектам, экспорт PNG, контекстное меню.
+### Canvas
+- Бесконечный холст: pan/zoom (10–400%), fit, reset, сохранение viewport.
+- Sticky/Text/Shapes/Connector/Draw/Image/Document-card/Eraser, resize/rotate, цвета, слои,
+  выравнивание, группировка, copy/paste, undo/redo (40 шагов), несколько досок.
+- Карточки реальных документов (открываются, переживают переименование, корректно реагируют
+  на удаление), поиск по объектам, экспорт PNG, контекстное меню, хоткеи.
 
-### Настройки (8 разделов)
-- **General**: язык (RU/EN, мгновенно), автосохранение + интервал, поведение при запуске,
-  подтверждения удаления, уведомления и их длительность, сброс.
-- **Appearance**: 6 реальных тем (Nexus Dark, Nexus Light, Midnight, Graphite, Nord, Dracula)
-  + «как в системе», масштаб интерфейса 90/100/110%, плотность, анимации,
-  режим движения (system/full/reduced) с поддержкой `prefers-reduced-motion`.
-- **Typography**: шрифты UI/редактора/моно, размеры, интервал, толщина + fallback-проверка.
-- **Editor**, **Workspace**: параметры редактора и Explorer’а (сортировки, hidden, reveal active).
-- **Privacy & Security**: локальное хранилище и его размер, отсутствие телеметрии/сети,
-  диагностика (только в памяти), экспорт/импорт бэкапа с валидацией и санитайзом,
-  очистка временных данных, реальный список разрешений.
-- **Shortcuts**: поиск, группы, запись новых сочетаний, проверка конфликтов, сброс
-  одной команды/всех, восстановление по умолчанию.
-- **About**: версии (NEXUS 0.1.0, Tauri 2.12.7), стек, лицензии, копирование сведений.
+### Настройки и UX
+- 8 разделов: General, Appearance (**6 реальных тем** + системная), Typography, Editor,
+  Workspace, Privacy & Security, Shortcuts, About.
+- Shortcut Manager: переназначение, проверка конфликтов, сброс.
+- RU/EN без перезапуска; сдержанные анимации + reduced motion; тосты, подтверждения, empty states.
+- Экспорт/импорт резервной копии (workspace + настройки + Canvas) с валидацией и санитайзом.
 
-### UX
-- Command Palette (Ctrl+P): команды, поиск, клавиатурная навигация.
-- Качественные, но сдержанные анимации: панели, модалки, меню, вкладки, дерево, тосты,
-  смена темы; всё отключается через reduced motion.
-- Toast-уведомления с действиями (Undo), подтверждения, контекстные меню, empty states,
-  стилизованные скроллбары, адаптив 1920×1080 / 1440×900 / 1366×768 / 1280×720.
-- Error Boundary: ошибка UI не оставляет белый экран.
+## Установка
 
-## Быстрый старт
+Подробно — в [docs/INSTALL.md](docs/INSTALL.md).
+
+### Быстро: готовый бинарник
 
 ```bash
+curl -L -o nexus.tar.gz https://github.com/<USER>/nexus/releases/download/v0.1.0/nexus-0.1.0-linux-x86_64.tar.gz
+tar -xzf nexus.tar.gz
+chmod +x nexus && ./nexus
+```
+
+Требуется Linux x86_64 с WebKitGTK 4.1 и GTK 3.
+
+### Из исходников
+
+```bash
+git clone https://github.com/<USER>/nexus.git
+cd nexus
 pnpm install
-
-pnpm tauri dev                 # разработка (Vite + Tauri, окно 1440×900)
-pnpm tauri build --no-bundle   # релизный бинарник: src-tauri/target/release/nexus
-
-pnpm dev                       # только фронтенд в браузере
-pnpm build                     # type-check + production build
+pnpm tauri dev                 # разработка
+pnpm tauri build --no-bundle   # src-tauri/target/release/nexus
 ```
 
-Требования: Node ≥ 20, Rust (stable), WebKitGTK 4.1, GTK 3.
+Зависимости для Arch/CachyOS:
 
-## Структура
-
-```
-src/
-  App.tsx                 — каркас окна, темы, диагностика, guard внешних ссылок
-  main.tsx                — применение настроек до первого paint
-  components/             — titlebar, sidebar'ы, редактор, палитра, диалоги, ui-примитивы
-  canvas/                 — Canvas: store, Konva-сцена, инструменты, свойства, поиск
-  settings/               — 8 разделов настроек, виджеты, бэкапы
-  lib/                    — store (zustand+persist), settings, theme, i18n, shortcuts,
-                            sanitize, format, commands, window (Tauri API)
-  index.css               — 6 тем (CSS-переменные), анимации, редактор, density
-src-tauri/                — Tauri 2: окно без декораций, минимальные capabilities, CSP
-docs/                     — отчёт аудита, security-отчёт
-screenshots/              — UI-скриншоты (audit/ — результат аудита)
+```bash
+sudo pacman -S --needed base-devel rust nodejs pnpm webkit2gtk-4.1 gtk3 libsoup3 librsvg
 ```
 
-## Безопасность и приватность
+## Стек
 
-- Нет телеметрии, аналитики, трекеров и HTTP-запросов — проверено аудитом кода и
-  ресурсными записями браузера; единственное хранилище — localStorage WebView.
-- Tauri: CSP для production + отдельный devCsp, минимальные capabilities
-  (только window-контролы), devtools отключены в релизе, release-бинарник stripped.
-- HTML заметок санитайзится при загрузке, вставке/дропе и импорте бэкапа;
-  внешние ссылки не навигируют WebView; persisted-state валидируется с fallback при порче.
-- Полный отчёт: [docs/security-audit.md](docs/security-audit.md),
-  итоги аудита: [docs/AUDIT_REPORT.md](docs/AUDIT_REPORT.md).
+**Tauri 2** (Rust + WebKitGTK) · **React 19** · **TypeScript** (strict) · **Tailwind CSS 3.4** ·
+**zustand** (+persist) · **Konva / react-konva** · **Lucide** · **Inter Variable**.
 
-## Ограничения
+## Разработка
 
-- Хранение только в localStorage: большие вложения Canvas (изображения) могут исчерпать
-  квоту — используйте бэкап (настройки → Privacy) и следите за размером.
-- Номера строк в редакторе приблизительные (по визуальным строкам/блокам), стиль курсора
-  зависит от поддержки CSS `caret-shape` в WebKitGTK.
-- Реальный клик по window-кнопкам (minimize/maximize/close) не покрыт e2e (нет инструмента
-  инъекции ввода в niri); вызовы Tauri API и permissions проверены сборкой.
-- Производительность при тысячах документов/объектов не измерялась (текущие сценарии — сотни).
+```bash
+pnpm dev            # фронтенд в браузере
+pnpm build          # tsc strict + production build
+pnpm tauri dev      # настольное приложение
+pnpm tauri build    # релиз + бандлы
+```
+
+Структура: `src/lib` — состояние/настройки/темы/i18n/шорткаты/безопасность;
+`src/components` — оболочка и UI-примитивы; `src/canvas` — доска; `src/settings` — настройки;
+`src-tauri` — нативная обвязка (CSP, capabilities). Подробнее — [README-раздел структуры](#структура).
+
+## Приватность и безопасность
+
+- Нет телеметрии, аналитики и HTTP-запросов; единственное хранилище — localStorage WebView.
+- Строгая production CSP, минимальные Tauri capabilities (только оконные контролы),
+  devtools и лишние зависимости исключены из релиза, бинарник stripped.
+- HTML заметок санитайзится при загрузке/вставке/импорте; внешние ссылки не навигируют WebView.
+- Полный аудит: [docs/security-audit.md](docs/security-audit.md).
+
+## Документация
+
+- [Установка и обновление](docs/INSTALL.md)
+- [Отчёт об аудите и доработке](docs/AUDIT_REPORT.md)
+- [Результаты тестирования](docs/test-results.txt)
+- [Аудит безопасности](docs/security-audit.md)
+
+## Известные ограничения
+
+- Хранение в localStorage (квота ~5 МБ): большие Canvas-изображения могут не сохраниться — используйте бэкап.
+- Canvas: геометрия rect/ellipse, без реверса стрелок/ручных якорей, snap-to-grid не реализован.
+- Номера строк в rich-редакторе приблизительные; стиль курсора зависит от WebKit.
+- Производительность на тысячах документов/объектов не профилировалась.
+
+## Лицензия
+
+[MIT](LICENSE) © NEXUS contributors
